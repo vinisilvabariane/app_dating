@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Namora comigo?</title>
+    <script src="https://cdn.jsdelivr.net/npm/fireworks-js@1/dist/fireworks.js"></script>
+    <script src="script.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="conteudo">
+        <h2 id="title">Aceita namorar comigo?</h2>
+        <div id="buttons">
+            <button id="sim" class="btn" onclick="sim()">SIM</button>
+            <button id="nao" class="btn" onclick="desvia(this)" onmouseover="desvia(this)">NÃO</button>
+        </div>
+    </div>
+
+    <video id="meuVideo" style="display:none; position:fixed; top:50%; left:50%; transform: translate(-50%, -50%);" controls width="500">
+        <source src="vid.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+    <img src="https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExZml4dHpxa25hN2VndWVicHFnajU3aGJicjUxMXE1aWZ6Mncxdm1jaiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/hqavGrF4pMkcFjFHqA/giphy-downsized-large.gif"
+        class="heart-gif" id="heart3">
+
+    <div id="textBox">
+        <h2>Você escolheu a melhor/única opção agora nós estamos namorando!</h2>
+    </div>
+</body>
+</html>

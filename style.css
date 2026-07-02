@@ -1,0 +1,88 @@
+#conteudo {
+    background: #ff7a7a;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: 10px;
+    text-align: center;
+    font-family: sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#title {
+    margin-bottom: 20px;
+}
+
+#buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.btn {
+    background: black;
+    color: white;
+    border: none;
+    padding: 10px;
+    width: 80px;
+    border-radius: 5px;
+    margin: 5px;
+    z-index: 9999;
+}
+
+#textBox {
+    display: none;
+    position: absolute;
+    width: 80%;
+    max-width: 500px;
+    bottom: 80px; /* Ajuste para subir o texto */
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 20px;
+    border-radius: 10px;
+    background: none;
+    text-align: center;
+    font-family: sans-serif;
+    z-index: 2;
+}
+
+.heart-gif {
+    display: none;
+    position: absolute;
+    width: 80%;
+    max-width: 600px;
+    animation: fade-in 1s forwards;
+    bottom: 40px; /* Ajuste para descer a imagem */
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    border: 5px solid #ff4d4d;
+    z-index: 1;
+}
+
+@keyframes spin-in {
+    0% {
+        transform: translate(-50%, -50%) rotate(-360deg);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translate(-50%, -50%) rotate(0deg);
+        opacity: 1;
+    }
+}
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
