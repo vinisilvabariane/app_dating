@@ -2,32 +2,102 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Namora comigo?</title>
-    <script src="https://cdn.jsdelivr.net/npm/fireworks-js@1/dist/fireworks.js"></script>
-    <script src="script.js"></script>
+    <title>Uma fase curtinha</title>
     <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
 </head>
 <body>
-    <div id="conteudo">
-        <h2 id="title">Aceita namorar comigo?</h2>
-        <div id="buttons">
-            <button id="sim" class="btn" onclick="sim()">SIM</button>
-            <button id="nao" class="btn" onclick="desvia(this)" onmouseover="desvia(this)">NÃO</button>
-        </div>
-    </div>
+    <main class="game-shell" aria-label="Jogo 2D">
+        <canvas id="gameCanvas" width="960" height="540"></canvas>
 
-    <video id="meuVideo" style="display:none; position:fixed; top:50%; left:50%; transform: translate(-50%, -50%);" controls width="500">
-        <source src="vid.mp4" type="video/mp4">
-        Your browser does not support the video tag.
-    </video>
+        <section id="startScreen" class="screen-panel is-visible">
+            <div class="start-copy menu-copy">
+                <p class="eyebrow">Uma fase curtinha</p>
+                <h1>Aperta start e confia</h1>
+                <p>Use setas ou WASD para andar. Espaco pula. Shift usa dash quando liberar.</p>
+                <div class="phase-menu" aria-label="Menu de fases">
+                    <button class="phase-card" data-phase="0">
+                        <span>Fase 1</span>
+                        <strong>Pulso</strong>
+                    </button>
+                    <button class="phase-card is-locked" data-phase="1" disabled>
+                        <span>Fase 2</span>
+                        <strong>Impulso</strong>
+                    </button>
+                    <button class="phase-card is-locked" data-phase="2" disabled>
+                        <span>Fase 3</span>
+                        <strong>Sintonia</strong>
+                    </button>
+                </div>
+                <button id="startButton" class="primary-button">Comecar fase 1</button>
+            </div>
+        </section>
 
-    <img src="https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExZml4dHpxa25hN2VndWVicHFnajU3aGJicjUxMXE1aWZ6Mncxdm1jaiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/hqavGrF4pMkcFjFHqA/giphy-downsized-large.gif"
-        class="heart-gif" id="heart3">
+        <section id="hud" class="hud" aria-live="polite">
+            <div class="hud-pill">
+                <span>Fase</span>
+                <strong id="phaseLabel">1/3</strong>
+            </div>
+            <div class="hud-pill">
+                <span>Skills</span>
+                <strong id="skillLabel">-</strong>
+            </div>
+            <div class="hud-pill">
+                <span>Tempo</span>
+                <strong id="timer">00:00</strong>
+            </div>
+        </section>
 
-    <div id="textBox">
-        <h2>Você escolheu a melhor/única opção agora nós estamos namorando!</h2>
-    </div>
+        <div id="toast" class="toast" role="status"></div>
+
+        <nav class="touch-controls" aria-label="Controles do jogo">
+            <button class="touch-button" data-key="left" aria-label="Esquerda">&lt;</button>
+            <button class="touch-button" data-key="right" aria-label="Direita">&gt;</button>
+            <button class="touch-button jump" data-key="jump" aria-label="Pular">J</button>
+            <button class="touch-button dash" data-key="dash" aria-label="Dash">D</button>
+        </nav>
+
+        <section id="interlude" class="interlude" aria-live="polite">
+            <div class="interlude-card">
+                <div class="tiny-hero" aria-hidden="true">
+                    <span class="tiny-heart"></span>
+                </div>
+                <div class="dialogue-copy">
+                    <p id="interludeText">Texto da transicao.</p>
+                    <span id="interludeHint" class="interlude-hint">Pressione E</span>
+                </div>
+            </div>
+        </section>
+
+        <section id="proposal" class="proposal" aria-modal="true" role="dialog" aria-labelledby="proposalTitle">
+            <div class="proposal-card">
+                <p class="eyebrow">Fim da fase</p>
+                <h2 id="proposalTitle">Quer namorar comigo?</h2>
+                <p id="proposalText">Eu faria muitas fases so para chegar nesse momento com voce.</p>
+                <div class="proposal-actions">
+                    <button id="yesButton" class="primary-button">Sim, mil vezes</button>
+                    <button id="thinkButton" class="ghost-button">Vou pensar</button>
+                </div>
+                <div class="post-yes-actions">
+                    <button id="playgroundButton" class="ghost-button video-action">Playground livre</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="surpriseScene" class="surprise-scene" aria-live="polite">
+            <button id="closeSurpriseButton" class="close-surprise" aria-label="Fechar surpresa">X</button>
+            <img
+                src="https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExZml4dHpxa25hN2VndWVicHFnajU3aGJicjUxMXE1aWZ6Mncxdm1jaiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/hqavGrF4pMkcFjFHqA/giphy-downsized-large.gif"
+                alt="Coracoes animados"
+                class="heart-gif">
+            <h2>Agora sim.</h2>
+        </section>
+
+        <video id="surpriseAudio" class="surprise-audio" preload="auto" playsinline>
+            <source src="vid.mp4" type="video/mp4">
+            Seu navegador nao suporta video.
+        </video>
+    </main>
 </body>
 </html>
